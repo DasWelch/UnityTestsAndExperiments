@@ -11,7 +11,7 @@ public class Mover : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = new Vector2(0, 0);
+        //transform.position = new Vector2(0, 0);
     }
 
     // Update is called once per frame
