@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Mover : MonoBehaviour
@@ -8,6 +9,8 @@ public class Mover : MonoBehaviour
     public Vector3 acc;
     public Vector3 vel;
     public Vector3 pos;
+
+    public Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,18 +26,23 @@ public class Mover : MonoBehaviour
     void FixedUpdate() 
     {
         var move = Forward2d();
-        gameObject.transform.position += move * Time.deltaTime;//gameObject.transform.forward * Time.deltaTime;
+        rb.transform.position += move * Time.deltaTime; //gameObject.transform.forward * Time.deltaTime;
     }
 
     Vector3 Forward2d() 
     {
         Vector3 forward = new Vector3(0, 0, 0);
 
-        float ang = gameObject.transform.position.z;
-        forward.x = Mathf.Cos(ang);
-        forward.y = Mathf.Sin(ang);
-
+        float angRad = rb.transform.rotation.z;
+        //Debug.Log(angRad.ToString());
+        forward.x = Mathf.Cos(angRad);
+        forward.y = Mathf.Sin(angRad);
+        Debug.Log(forward.ToString());
         return forward;
+    }
+
+    float DegToRad(float angDeg) {
+        return angDeg * Mathf.PI / 180f;
     }
 
 }
